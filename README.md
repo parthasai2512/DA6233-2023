@@ -32,4 +32,28 @@ print vs echo:
 
 Hash is used to comment- #.
 
-is used to print the echo for print the code -#|
+1.is used to print the echo for print the code -#|
+2.is used to print the eval not to instal the package again and again(avodi multiple installation) -#|
+
+# calling library:
+
+Load the library tidyverse by calling 'library()' function.
+library(package name)
+
+
+#Dataframe(table):
+
+######mpg is a dataframe from ggplot2 package which we have installed from tidyverse.
+
+# pandas(panel data analysis- use a API) in python is getting replaced with polar(dataframe).
+
+
+head- top 6 rows
+tail- last 6 rows
+print- to print and use the dataframe.
+
+dataframe- has vector(identical datatype and length of the rows for merging to table is required), it is usally of matrix form.- this condition is same for pandas and polar dataframe as well.
+
+** how to impute the missing value replacing missing values in R is N/A(counted as data) and in python it is NULL.
+
+
