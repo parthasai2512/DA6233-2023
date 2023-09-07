@@ -57,3 +57,9 @@ dataframe- has vector(identical datatype and length of the rows for merging to t
 ** how to impute the missing value replacing missing values in R is N/A(counted as data) and in python it is NULL.
 
 
+# How to get pdf report from Rmarkdown using Knit:
+
+1. install>> for latex package pdflatex>> install.packages('MiKTeX') before this install miktex software in the local systme and update the packages.
+2. install >> rmarkdonw package>>install.packages('rmarkdown')
+3.install>> tinyTex package tinytex::install_tinytex()
+4. use rmarkdown and knit to generate pdf/word/html as required.
