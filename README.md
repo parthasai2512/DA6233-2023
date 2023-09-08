@@ -91,6 +91,10 @@ hist(cars[cars$Type=="Wagon","MPG_Combo"])
 
 summary(cars[cars$Type=="SUV","MPG_Combo"],na.rm=TRUE)
 summary(cars[cars$Type=="Sports","MPG_Combo"],na.rm=TRUE)
+summary(cars[cars$Type=="Sports","MPG_Combo"],na.rm=TRUE)
+summary(cars[cars$Type=="Sports","MPG_Combo"],na.rm=TRUE)
+summary(cars[cars$Type=="Sports","MPG_Combo"],na.rm=TRUE)
+
 
 
 
@@ -139,4 +143,143 @@ boxplot(MPG_Combo ~ Type,data=cars, main="MPG_Combo by Type",xlab="Type",ylab = 
 means <- tapply(cars$MPG_Combo, cars$Type, mean,na.rm=TRUE)
 points(means, pch=22, col="blue")
 
+
+
+#Algo 1 assignment fully done, refer below:
+# Student Name: Munivenkataparthasai Madallapalli
+# Student Id: pua528
+# HW1
+
+# set your own path
+setwd('D:\\UTSA\\Fall 2023\\Classes\\DA Algo 1\\Assignment') 
+
+# set path is working
+getwd()
+
+#output:
+#[1] "D:/UTSA/Fall 2023/Classes/DA Algo 1/Assignment"
+
+######################################################
+# Exercise 1
+########################################################
+# read dataset 
+
+cars=read.csv("Cars.csv", header = TRUE) 
+
+# (a)
+
+# combined mpg varialbe 
+
+MPG_Combo <- 0.6*cars$MPG_City+0.4*cars$MPG_Highway  
+
+# data frame with MPG_Combo 
+
+cars=data.frame(cars, MPG_Combo)  
+
+#boxplot:
+
+boxplot(cars$MPG_Combo,ylab="MPG_Combo")
+points(mean(cars$MPG_Combo, na.rm=TRUE),col="blue",pch=22)
+
+
+# (b)
+
+#boxplot: MPG_Combo by Type 
+boxplot(MPG_Combo ~ Type,data=cars, main="MPG_Combo by Type",xlab="Type",ylab = "MPG_Combo")
+means <- tapply(cars$MPG_Combo, cars$Type, mean,na.rm=TRUE)
+points(means, pch=22, col="blue")
+
+# (c) descriptive statistics for Horsepower for all vehicles
+summary(cars$Horsepower,main="Horsepower",na.rm=TRUE)
+
+#Visual Method:
+
+#Histogram:
+hist(cars$Horsepower,main="Horsepower",xlab="Horsepower")
+
+#boxplot:
+boxplot(cars$Horsepower,ylab="Horsepower")
+points(mean(cars$Horsepower, na.rm=TRUE),col="blue",pch=22)
+
+#qq plot:
+qqnorm(cars$Horsepower); qqline(cars$Horsepower, col = 2)
+
+#quantitative method:
+#shapiro test:
+shapiro.test(cars$Horsepower)
+
+
+# (d)
+
+#subset data for type
+
+data_type<- subset(cars, Type %in% c("SUV", "Sports", "Truck"))
+
+
+#Histogram:
+hist(data_type$Horsepower,main="Horsepower By Type",xlab="Horsepower")
+ 
+#boxplot: Horsepower by Type 
+boxplot(Horsepower~ Type,data=data_type, main="Horsepower by Type",xlab="Type",ylab = "Horsepower")
+means <- tapply(data_type$Horsepower, data_type$Type, mean,na.rm=TRUE)
+points(means, pch=22, col="blue")
+
+
+ 
+#qq plot:
+qqnorm(data_type$Horsepower); qqline(data_type$Horsepower, col = 2)
+ 
+#quantitative method:
+# Shapiro-Wilk test for Sports:
+shapiro.test(data_type$Horsepower[data_type$Type == "Sports"])
+
+# Shapiro-Wilk test for SUV
+shapiro.test(data_type$Horsepower[data_type$Type == "SUV"])
+
+# Shapiro-Wilk test for Truck
+shapiro.test(data_type$Horsepower[data_type$Type=="Truck"])
+ 
+#2.(C)
+#subsetting the data for cars(SUV & Truck)
+data_type_test<- subset(cars, Type %in% c("SUV","Truck"))
+
+# Performing wilcox Test
+wilcox.test(Horsepower ~ Type, data=data_type_test, exact=FALSE)
+
+#3.(a)
+
+#installing required packages for filtering:
+install.packages("dplyr")
+library(dplyr)
+#filtering the data for airquality:
+airquality_filter.july=airquality %>% filter(airquality$Month==7)
+airquality_filter.august=airquality %>% filter(airquality$Month==8)
+
+#pan divisiion for qq-plot:
+
+par(mfrow=c(1,2))
+
+# QQ Plot for wind-July
+qqnorm(airquality_filter.july$Wind,main = "QQ Plot for airquality_filter.july",ylab="Wind speed in MPH")
+qqline(airquality_filter.july$Wind,col="red")
+
+
+# QQ Plot for wind-August
+qqnorm(airquality_filter.august$Wind,main = "QQ Plot for airquality_filter.august",ylab = "Wind speed in MPH")
+qqline(airquality_filter.august$Wind,col="red")
+
+#quantitative method:
+# Shapiro-Wilk test:
+
+shapiro.test(airquality_filter.july$Wind)
+shapiro.test(airquality_filter.august$Wind)
+
+# combining july and august data to perform variance:
+Combined_july_august=union(airquality_filter.july,airquality_filter.august)
+
+#equal variance test: 
+var.test(Combined_july_august$Wind ~ Combined_july_august$Month, alternative="two.sided")
+
+#run pooled t-test
+t.test(Combined_july_august$Wind ~ Combined_july_august$Month,alternative="two.sided",var.equal=TRUE)
 
