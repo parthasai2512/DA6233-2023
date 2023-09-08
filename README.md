@@ -92,3 +92,51 @@ hist(cars[cars$Type=="Wagon","MPG_Combo"])
 summary(cars[cars$Type=="SUV","MPG_Combo"],na.rm=TRUE)
 summary(cars[cars$Type=="Sports","MPG_Combo"],na.rm=TRUE)
 
+
+
+Algo Assignment -1:
+
+# Student Name: Munivenkataparthasai Madallapalli
+# Student Id: pua528
+# HW1
+
+# set your own path
+setwd('D:\\UTSA\\Fall 2023\\Classes\\DA Algo 1\\Assignment') 
+
+# set path is working
+getwd()
+
+#output:
+#[1] "D:/UTSA/Fall 2023/Classes/DA Algo 1/Assignment"
+
+######################################################
+# Exercise 1
+########################################################
+# read dataset 
+
+cars=read.csv("Cars.csv", header = TRUE) 
+
+# (a)
+
+# combined mpg varialbe 
+
+MPG_Combo <- 0.6*cars$MPG_City+0.4*cars$MPG_Highway  
+
+# data frame with MPG_Combo 
+
+cars=data.frame(cars, MPG_Combo)  
+
+#boxplot:
+
+boxplot(cars$MPG_Combo,ylab="MPG_Combo")
+points(mean(cars$MPG_Combo, na.rm=TRUE),col="blue",pch=22)
+
+
+# (b)
+
+#boxplot: MPG_Combo by Type 
+boxplot(MPG_Combo ~ Type,data=cars, main="MPG_Combo by Type",xlab="Type",ylab = "MPG_Combo")
+means <- tapply(cars$MPG_Combo, cars$Type, mean,na.rm=TRUE)
+points(means, pch=22, col="blue")
+
+
