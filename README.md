@@ -63,3 +63,32 @@ dataframe- has vector(identical datatype and length of the rows for merging to t
 2. install >> rmarkdonw package>>install.packages('rmarkdown')
 3.install>> tinyTex package tinytex::install_tinytex()
 4. use rmarkdown and knit to generate pdf/word/html as required.
+
+R - Algo 1- Assignment:
+
+
+# (b)
+
+#boxplot: MPG_Combo by Type 
+boxplot(MPG_Combo ~ Type,data=cars, main="MPG_Combo by Type",xlab="Type",ylab = "MPG_Combo")
+means <- tapply(cars$MPG_Combo, cars$Type, mean,na.rm=TRUE)
+points(means, pch=22, col="blue")
+
+
+
+shapiro.test(cars[cars$Type=="Sedan","MPG_Combo"])
+shapiro.test(cars[cars$Type=="Sports","MPG_Combo"])
+shapiro.test(cars[cars$Type=="SUV","MPG_Combo"])
+shapiro.test(cars[cars$Type=="Truck","MPG_Combo"])
+shapiro.test(cars[cars$Type=="Wagon","MPG_Combo"])
+
+par(mfrow=c(1,1))
+hist(cars[cars$Type=="Sedan","MPG_Combo"])
+hist(cars[cars$Type=="Sports","MPG_Combo"])
+hist(cars[cars$Type=="SUV","MPG_Combo"])
+hist(cars[cars$Type=="Truck","MPG_Combo"])
+hist(cars[cars$Type=="Wagon","MPG_Combo"])
+
+summary(cars[cars$Type=="SUV","MPG_Combo"],na.rm=TRUE)
+summary(cars[cars$Type=="Sports","MPG_Combo"],na.rm=TRUE)
+
